@@ -4,7 +4,7 @@ webpackJsonp([1],[
 /***/ function(module, exports) {
 
 	module.exports = function sayHello() {
-	    console.log('Hello!');
+	    return 'Hello';
 	}
 
 

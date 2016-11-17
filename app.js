@@ -97,12 +97,17 @@
 
 	// This is working as require will be compiled into a __webpack_require__ call.
 	__webpack_require__.e/* nsure */(1, function () {
-	        __webpack_require__(1).sayHello();
+	        document.body.children[0].innerHTML = __webpack_require__(1)();
 	    });
 
 	// This is not working, generating wrong code, as syncedRequire will be compiled into the same.
 	__webpack_require__.e/* nsure */(1/* duplicate */, function (syncedRequire) {
-	        syncedRequire('./module').sayHello();
+	        try {
+	            document.body.children[1].innerHTML = syncedRequire('./module')();
+	        } catch(error) {
+	            // Shows: TypeError: Cannot read property 'call' of undefined
+	            document.body.children[1].innerHTML = error;
+	        }
 	    });
 
 

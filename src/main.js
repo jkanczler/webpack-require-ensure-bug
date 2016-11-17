@@ -2,12 +2,17 @@
 require.ensure(
     ['./module'],
     function () {
-        require('./module').sayHello();
+        document.body.children[0].innerHTML = require('./module')();
     });
 
 // This is not working, generating wrong code, as syncedRequire will be compiled into the same.
 require.ensure(
     ['./module'],
     function (syncedRequire) {
-        syncedRequire('./module').sayHello();
+        try {
+            document.body.children[1].innerHTML = syncedRequire('./module')();
+        } catch(error) {
+            // Shows: TypeError: Cannot read property 'call' of undefined
+            document.body.children[1].innerHTML = error;
+        }
     });
